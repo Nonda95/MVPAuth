@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MVPAuth</string>
+    <string name="action_settings">Settings</string>
+</resources>
