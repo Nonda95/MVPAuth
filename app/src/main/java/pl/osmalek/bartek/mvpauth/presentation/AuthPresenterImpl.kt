@@ -27,28 +27,44 @@ class AuthPresenterImpl : AuthPresenter, LoginService.SignInListener {
         }
     }
 
-    override fun validateLogin(login: String?) {
-        if (loginValidator.validate(login)) {
-            view?.hideLoginError()
+    override fun onSignedIn(success: Boolean) {
+        view?.hideLoading()
+        if (success) {
+            view?.showSignInSuccess()
         } else {
-            view?.showLoginError("Invalid login")
+            view?.showSignInFailed()
         }
     }
 
-    override fun validatePassword(password: String?) {
-        if (passwordValidator.validate(password)) {
+    override fun validateCredentials(login: String, password: String) {
+        val isValidLogin = loginValidator.validate(login)
+        val isValidPassword = passwordValidator.validate(password)
+        showLoginError(isValidLogin)
+        showPasswordError(isValidPassword)
+        enableSignIn(isValidLogin && isValidPassword)
+    }
+
+    private fun enableSignIn(isSignInEnabled: Boolean) {
+        if (isSignInEnabled) {
+            view?.enableSignIn()
+        } else {
+            view?.disableSignIn()
+        }
+    }
+
+    private fun showPasswordError(isValidPassword: Boolean) {
+        if (isValidPassword) {
             view?.hidePasswordError()
         } else {
             view?.showPasswordError("Invalid password")
         }
     }
 
-    override fun onSignedIn(success: Boolean) {
-        view?.hideLoading()
-        if(success) {
-            view?.showLoginSuccess()
+    private fun showLoginError(isValidLogin: Boolean) {
+        if (isValidLogin) {
+            view?.hideLoginError()
         } else {
-            view?.showLoginFailed()
+            view?.showLoginError("Invalid login")
         }
     }
 

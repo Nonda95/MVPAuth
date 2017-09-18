@@ -8,7 +8,9 @@ interface AuthView {
     fun hidePasswordError()
     fun showLoading()
     fun hideLoading()
-    fun showLoginSuccess()
-    fun showLoginFailed()
+    fun showSignInSuccess()
+    fun showSignInFailed()
+    fun enableSignIn()
+    fun disableSignIn()
 }
 

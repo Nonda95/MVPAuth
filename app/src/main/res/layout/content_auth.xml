@@ -15,7 +15,8 @@
         android:id="@+id/tilLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Login">
+        android:hint="Login"
+        android:labelFor="@+id/etLogin">
 
         <EditText
             android:id="@+id/etLogin"
@@ -27,7 +28,8 @@
         android:id="@+id/tilPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password">
+        android:hint="Password"
+        android:labelFor="@+id/etPassword">
 
         <EditText
             android:id="@+id/etPassword"
@@ -40,6 +42,7 @@
         android:id="@+id/butSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="Sign in" />
 
 </LinearLayout>

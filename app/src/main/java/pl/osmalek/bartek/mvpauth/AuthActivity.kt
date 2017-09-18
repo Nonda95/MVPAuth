@@ -27,6 +27,23 @@ class AuthActivity : AppCompatActivity(), AuthView {
         setSignInListener()
     }
 
+    private fun setTextWatchers() {
+        etLogin.addCredentialsWatcher()
+        etPassword.addCredentialsWatcher()
+    }
+
+    private fun EditText.addCredentialsWatcher() {
+        addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(text: Editable?) {
+                presenter.validateCredentials(etLogin.text.toString(), etPassword.text.toString())
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        })
+    }
+
     private fun setSignInListener() {
         butSignIn.setOnClickListener {
             presenter.signIn(etLogin.text.toString(), etPassword.text.toString())
@@ -38,23 +55,6 @@ class AuthActivity : AppCompatActivity(), AuthView {
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(etLogin.windowToken,
                 InputMethodManager.RESULT_UNCHANGED_SHOWN)
-    }
-
-    private fun setTextWatchers() {
-        etLogin.addWatcher(presenter::validateLogin)
-        etPassword.addWatcher(presenter::validatePassword)
-    }
-
-    private fun EditText.addWatcher(afterChange: (String?) -> Unit) {
-        addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                afterChange(s?.toString())
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
-        })
     }
 
     override fun showLoading() {
@@ -69,15 +69,15 @@ class AuthActivity : AppCompatActivity(), AuthView {
         }
     }
 
-    override fun showLoginSuccess() {
+    override fun showSignInSuccess() {
         runOnUiThread {
-            Snackbar.make(flLoading, "Success", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(flLoading, "Sign in succeed", Snackbar.LENGTH_LONG).show()
         }
     }
 
-    override fun showLoginFailed() {
+    override fun showSignInFailed() {
         runOnUiThread {
-            Snackbar.make(flLoading, "Fail", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(flLoading, "Sign in failed", Snackbar.LENGTH_LONG).show()
         }
     }
 
@@ -95,6 +95,14 @@ class AuthActivity : AppCompatActivity(), AuthView {
 
     override fun hidePasswordError() {
         tilPassword.error = null
+    }
+
+    override fun enableSignIn() {
+        butSignIn.isEnabled = true
+    }
+
+    override fun disableSignIn() {
+        butSignIn.isEnabled = false
     }
 
     override fun onDestroy() {
