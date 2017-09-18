@@ -1,7 +1,7 @@
 package pl.osmalek.bartek.mvpauth.presentation
 
-import pl.osmalek.bartek.mvpauth.LoginValidator
-import pl.osmalek.bartek.mvpauth.PasswordValidator
+import pl.osmalek.bartek.mvpauth.validators.LoginValidator
+import pl.osmalek.bartek.mvpauth.validators.PasswordValidator
 
 class AuthPresenterImpl : AuthPresenter, LoginService.SignInListener {
     private var view: AuthView? = null

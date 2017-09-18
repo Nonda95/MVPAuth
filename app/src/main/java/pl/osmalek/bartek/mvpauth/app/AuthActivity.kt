@@ -1,4 +1,4 @@
-package pl.osmalek.bartek.mvpauth
+package pl.osmalek.bartek.mvpauth.app
 
 import android.content.Context
 import android.os.Bundle
@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.content_auth.*
+import pl.osmalek.bartek.mvpauth.R
 import pl.osmalek.bartek.mvpauth.presentation.AuthPresenter
 import pl.osmalek.bartek.mvpauth.presentation.AuthPresenterImpl
 import pl.osmalek.bartek.mvpauth.presentation.AuthView

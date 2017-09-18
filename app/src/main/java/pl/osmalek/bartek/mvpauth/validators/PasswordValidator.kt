@@ -1,4 +1,4 @@
-package pl.osmalek.bartek.mvpauth
+package pl.osmalek.bartek.mvpauth.validators
 
 private const val MIN_LENGTH = 6
 
